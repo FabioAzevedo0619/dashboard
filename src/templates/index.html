@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
-    <h1>{{.Message}}</h1>
+    <main class="main-container">
+      <div id="groups">
+        {{range .Groups}}
+        <div class="group">
+          <div class="group-header">{{.Name}}</div>
+          <div class="group-content">
+            {{range .Services}}
+            <a href="{{.URL}}" target="_blank" rel="noreferrer" class="service">
+              <img class="service-icon" src="{{.IconURL}}" />
+              <div class="service-info">{{.Name}}</div>
+            </a>
+            {{end}}
+          </div>
+        </div>
+        {{end}}
+      </div>
+
+      <div class="footer">Utopia</div>
+    </main>
   </body>
 </html>

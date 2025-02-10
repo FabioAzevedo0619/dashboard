@@ -104,7 +104,7 @@ body {
   gap: 10px;
 }
 
-groups-component > * {
+#groups > * {
   margin-top: var(--widget-gap);
 }
 
