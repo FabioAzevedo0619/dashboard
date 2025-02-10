@@ -27,4 +27,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner | toLower }}/dashboard:latest
+          tags: ghcr.io/fabioazevedo0619/dashboard:latest
