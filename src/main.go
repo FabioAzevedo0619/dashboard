@@ -28,6 +28,7 @@ type Dashboard struct {
 	Groups []Group `json:"groups"`
 }
 
+
 func loadConfig() (Dashboard, error) {
 	var dashboard Dashboard
 	configFile, err := os.Open("config/config.json")
@@ -45,27 +46,33 @@ func loadConfig() (Dashboard, error) {
 	return dashboard, err
 }
 
+// handleError is a utility function to handle HTTP error responses
+func handleError(w http.ResponseWriter, err error, message string) {
+	log.Printf("Error: %v", err)
+	http.Error(w, message, http.StatusInternalServerError)
+}
+
+// requestHandler handles the HTTP requests and serves the dashboard
 func requestHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("templates/index.html")
 	if err != nil {
-		log.Printf("Error loading template: %v", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		handleError(w, err, "Error loading template")
 		return
 	}
 
 	dashboard, err := loadConfig()
 	if err != nil {
-		log.Printf("Error loading config: %v", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		handleError(w, err, "Error loading config")
 		return
 	}
 
 	if err := tmpl.Execute(w, dashboard); err != nil {
-		log.Printf("Error executing template: %v", err)
+		handleError(w, err, "Error executing template")
 	}
 }
 
-func main() {
+// startServer initializes and starts the HTTP server
+func startServer() *http.Server {
 	// Serve static files from the "static" directory
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
@@ -78,7 +85,6 @@ func main() {
 		Handler: nil, // Default handler, which includes the ones above
 	}
 
-	// Start the server in a separate goroutine
 	go func() {
 		log.Println("Starting server on port 8080")
 		if err := server.ListenAndServe(); err != nil {
@@ -86,21 +92,33 @@ func main() {
 		}
 	}()
 
-	// Wait for termination signal for graceful shutdown
+	return server
+}
+
+// gracefulShutdown waits for a termination signal and shuts down the server gracefully
+func gracefulShutdown(server *http.Server) {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
 	// Block until we receive a signal
-	<-sigChan
-	log.Println("Shutting down server...")
+	sigReceived := <-sigChan
+	log.Printf("Received signal %v, shutting down server...", sigReceived)
 
-	// Graceful shutdown
+	// Graceful shutdown with a 5-second timeout
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := server.Shutdown(ctx); err != nil {
-		log.Printf("Server Shutdown Failed:%v", err)
+		log.Printf("Server shutdown failed: %v", err)
 	} else {
 		log.Println("Server gracefully stopped")
 	}
+}
+
+func main() {
+	// Start the server
+	server := startServer()
+
+	// Gracefully handle shutdown
+	gracefulShutdown(server)
 }
