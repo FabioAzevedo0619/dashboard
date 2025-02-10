@@ -1,1 +1,109 @@
-{}
+{
+  "groups": [
+    {
+      "name": "Personal",
+      "services": [
+        {
+          "name": "Vaultwarden",
+          "url": "https://vault.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/vaultwarden.svg"
+        },
+        {
+          "name": "Nextcloud",
+          "url": "https://drive.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/svg/nextcloud.svg"
+        },
+        {
+          "name": "PhotoPrism",
+          "url": "https://photos.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/photoprism.svg"
+        },
+        {
+          "name": "Linkding",
+          "url": "https://bookmarks.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/linkding.svg"
+        },
+        {
+          "name": "Stash",
+          "url": "https://stash.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/stash.svg"
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "services": [
+        {
+          "name": "Uptime Kuma",
+          "url": "https://uptime.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/uptime-kuma.svg"
+        },
+        {
+          "name": "Code-Server",
+          "url": "https://code.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/code.svg"
+        },
+        {
+          "name": "SyncThing",
+          "url": "https://backup.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/syncthing.svg"
+        },
+        {
+          "name": "SyncThing Raspberry Pi",
+          "url": "https://backup-pi.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/syncthing.svg"
+        },
+        {
+          "name": "RealDebrid",
+          "url": "https://real-debrid.com/",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/real-debrid.svg"
+        },
+        {
+          "name": "MeTube",
+          "url": "https://ytbdl.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/metube.svg"
+        }
+      ]
+    },
+    {
+      "name": "Monitoring",
+      "services": [
+        {
+          "name": "Server",
+          "url": "https://tower",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/unraid.svg"
+        },
+        {
+          "name": "Nginx",
+          "url": "https://proxy.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/nginx-proxy-manager.svg"
+        },
+        {
+          "name": "AdGuard",
+          "url": "https://dns.utopia-home.app",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/adguard-home.svg"
+        },
+        {
+          "name": "Tailscale",
+          "url": "https://login.tailscale.com/admin/machines",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/png/tailscale-light.png"
+        }
+      ]
+    },
+    {
+      "name": "General",
+      "services": [
+        {
+          "name": "Proton Mail",
+          "url": "https://mail.proton.me",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/proton-mail.svg"
+        },
+        {
+          "name": "Proton Drive",
+          "url": "https://drive.proton.me",
+          "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/proton-drive.svg"
+        }
+      ]
+    }
+  ]
+}
