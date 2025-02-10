@@ -6,6 +6,21 @@ import (
 	"net/http"
 )
 
+type Service struct {
+    Name    string `json:"name"`
+    URL     string `json:"url"`
+    IconURL string `json:"iconUrl"`
+}
+
+type Group struct {
+    Name     string    `json:"name"`
+    Services []Service `json:"services"`
+}
+
+type Dashboard struct {
+    Groups []Group `json:"groups"`
+}
+
 func helloHandler(w http.ResponseWriter, r *http.Request) {
     tmpl := template.Must(template.ParseFiles("template.html"))
     data := struct {
