@@ -2,11 +2,20 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintln(w, "Hello, World!")
+    tmpl := template.Must(template.ParseFiles("template.html"))
+    data := struct {
+        Title   string
+        Message string
+    }{
+        Title:   "Hello Page",
+        Message: "Hello, World!",
+    }
+    tmpl.Execute(w, data)
 }
 
 func main() {
