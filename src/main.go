@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -22,7 +23,7 @@ type Dashboard struct {
 }
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
-    tmpl := template.Must(template.ParseFiles("template.html"))
+    tmpl := template.Must(template.ParseFiles("templates/index.html"))
     data := struct {
         Title   string
         Message string
@@ -30,10 +31,17 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
         Title:   "Hello Page",
         Message: "Hello, World!",
     }
-    tmpl.Execute(w, data)
+
+    if err := tmpl.Execute(w, data); err != nil {
+        log.Printf("Error executing template: %v", err)
+    }
 }
 
 func main() {
+    // Serve static files from the "src/static" directory
+    fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
     http.HandleFunc("/", helloHandler)
     fmt.Println("Starting server at port 8080")
     if err := http.ListenAndServe(":8080", nil); err != nil {
